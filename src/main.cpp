@@ -5,18 +5,20 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <PubSubClient.h>
-
+//****************************************************************************
+// Local config
 // Global constants
-String dId = "12345";
-String webhook_auth = "yfmoKTz9dC";
-String webhook_endpoint = "http://192.168.0.104:3001/api/getDeviceConfig";
-const char* mqtt_server = "192.168.0.104";
+String dId = "12121212";
+String webhook_auth = "asdfg";
+String webhook_endpoint = "http://192.168.20.103:3001/api/getDeviceConfig";
+const char* mqtt_server = "192.168.20.103";
 long mqtt_port = 1883;
 
 //WiFi
 
-const char* wifi_ssid = "CasaNB";
-const char* wifi_password = "Bpjm2828";
+const char* wifi_ssid = "ingeniot";
+const char* wifi_password = "ingeniot2828";
+//*****************************************************************************
 
 // Global variables
 WiFiClient wifi_client; 
