@@ -10,8 +10,8 @@
 // Global constants
 String dId = "12121212";
 String webhook_auth = "asdfg";
-String webhook_endpoint = "http://192.168.20.103:3001/api/getDeviceConfig";
-const char* mqtt_server = "192.168.20.103";
+String webhook_endpoint = "http://192.168.1.106:3001/api/getDeviceConfig";
+const char* mqtt_server = "192.168.1.106";
 long mqtt_port = 1883;
 
 //WiFi
