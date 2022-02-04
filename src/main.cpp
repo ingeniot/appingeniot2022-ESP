@@ -9,9 +9,12 @@
 // Local config
 // Global constants
 String dId = "12345678";
-String webhook_auth = "8suMVOMDTM";
+String webhook_auth = "8suMV0MDTM";
 String webhook_endpoint = "http://panel.ingeniot.com.ar:3001/api/getdevicecredentials";
 const char* mqtt_server = "panel.ingeniot.com.ar";
+//String webhook_endpoint = "http://192.168.1.106:3001/api/getDeviceConfig";
+//const char* mqtt_server = "192.168.1.106";
+
 long mqtt_port = 1883;
 
 //WiFi
@@ -359,7 +362,7 @@ void check_mqtt_connection()
 
 bool get_device_config(){
   Serial.print(underlinePurple + "\n\n Getting device config from Webhook" + fontReset + Purple);
-  delay(2000);
+  delay(1000);
   String to_send = "dId=" + dId + "&password=" + webhook_auth;
   HTTPClient http;
   http.begin(webhook_endpoint);
@@ -371,7 +374,7 @@ bool get_device_config(){
     return false;
   }
   if(response_code != 200){
-    Serial.print(boldRed + "\n\n Error in response"+ fontReset + "error->" + response_code);    
+    Serial.print(boldRed + "\n\n Error in response"+ fontReset + "  error->" + response_code);    
     http.end();
     return false;
   }
