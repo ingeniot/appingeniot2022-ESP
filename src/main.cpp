@@ -10,7 +10,7 @@
 // Global constants
 String dId = "12345678";
 String webhook_auth = "8suMV0MDTM";
-String webhook_endpoint = "http://panel.ingeniot.com.ar:3001/api/getdevicecredentials";
+String webhook_endpoint = "https://panel.ingeniot.com.ar:3003/api/getdevicecredentials";
 const char* mqtt_server = "panel.ingeniot.com.ar";
 //String webhook_endpoint = "http://192.168.1.106:3001/api/getDeviceConfig";
 //const char* mqtt_server = "192.168.1.106";
@@ -289,7 +289,8 @@ void reconnect()
   }
 
   //Setting up Mqtt Server
-  mqtt_client.setServer(mqtt_server, mqtt_port);
+  mqtt_client.
+  setServer(mqtt_server, mqtt_port);
 
   Serial.print(underlinePurple + "\n\n\nTrying MQTT Connection" + fontReset + Purple + "  ⤵");
 
@@ -356,7 +357,7 @@ void check_mqtt_connection()
     mqtt_client.loop();
     process_sensors();
     send_data_to_broker();
-    //print_stats();
+    print_stats();
   }
 }
 
@@ -397,7 +398,7 @@ bool get_device_config(){
   return false;
 }
 
-/*
+
 
 long lastStats = 0;
 
@@ -437,4 +438,3 @@ void print_stats()
   }
 }
 
-*/
