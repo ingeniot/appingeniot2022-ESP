@@ -8,12 +8,17 @@
 //****************************************************************************
 // Local config
 // Global constants
-String dId = "12345678";
-String webhook_auth = "8suMV0MDTM";
-String webhook_endpoint = "https://panel.ingeniot.com.ar:3003/api/getdevicecredentials";
-const char* mqtt_server = "panel.ingeniot.com.ar";
+// String dId = "12345678";
+// String webhook_auth = "8suMV0MDTM";
+// String webhook_endpoint = "https://panel.ingeniot.com.ar:3003/api/getdevicecredentials";
+// const char* mqtt_server = "panel.ingeniot.com.ar";
 //String webhook_endpoint = "http://192.168.1.106:3001/api/getDeviceConfig";
 //const char* mqtt_server = "192.168.1.106";
+
+ String dId = "12345678";
+ String webhook_auth = "kCJSZfxbx8";
+ String webhook_endpoint = "https://ap.ingeniot.com.ar:3003/api/getdevicecredentials";
+ const char* mqtt_server = "app.ingeniot.com.ar";
 
 long mqtt_port = 1883;
 
