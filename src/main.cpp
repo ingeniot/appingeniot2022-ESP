@@ -8,17 +8,23 @@
 //****************************************************************************
 // Local config
 // Global constants
-// String dId = "12345678";
-// String webhook_auth = "8suMV0MDTM";
-// String webhook_endpoint = "https://panel.ingeniot.com.ar:3003/api/getdevicecredentials";
-// const char* mqtt_server = "panel.ingeniot.com.ar";
+
+/******************/
+/*     Panel      */
+//String dId_panel = "12345678";
+//String webhook_auth = "8suMV0MDTM";
+//String webhook_endpoint = "https://panel.ingeniot.com.ar:3003/api/getdevicecredentials";
+//const char* mqtt_server = "panel.ingeniot.com.ar";
+/******************/
+
+String dId = "12345678";
+String webhook_auth = "kCJszFxbx8";
+String webhook_endpoint = "https://app.ingeniot.com.ar:3003/api/getdevicecredentials";
+const char* mqtt_server = "app.ingeniot.com.ar";
+
+
 //String webhook_endpoint = "http://192.168.1.106:3001/api/getDeviceConfig";
 //const char* mqtt_server = "192.168.1.106";
-
- String dId = "12345678";
- String webhook_auth = "kCJSZfxbx8";
- String webhook_endpoint = "https://ap.ingeniot.com.ar:3003/api/getdevicecredentials";
- const char* mqtt_server = "app.ingeniot.com.ar";
 
 long mqtt_port = 1883;
 
@@ -54,7 +60,6 @@ void clear();
 bool get_device_config();
 void check_mqtt_connection();
 void reconnect();
-
 void process_sensors();
 void process_actuators();
 void send_data_to_broker();
@@ -91,7 +96,7 @@ void setup() {
   Serial.print(boldBlue);
   Serial.print(WiFi.localIP());
   Serial.print(fontReset);
-  mqtt_client.setCallback(mqtt_callback);
+  mqtt_client.setCallback(mqtt_callback);   //Establece la función que llama cuando recibe un mensaje
   Serial.print(boldGreen + "\n\n  Configuro Callbak!!" + fontReset);
 
 }
@@ -266,7 +271,6 @@ void send_data_to_broker()
 
       mqtt_client.publish(topic.c_str(), toSend.c_str());
 
-
       //STATS
       long counter = mqtt_data_doc["variables"][i]["counter"];
       counter++;
@@ -283,6 +287,7 @@ void clear() {
   Serial.write(27);
   Serial.print("[H");   //cursor to home command
 }
+
 void reconnect()
 {
   if (!get_device_config())
@@ -294,14 +299,13 @@ void reconnect()
   }
 
   //Setting up Mqtt Server
-  mqtt_client.
-  setServer(mqtt_server, mqtt_port);
-
+  mqtt_client.setServer(mqtt_server, mqtt_port);
   Serial.print(underlinePurple + "\n\n\nTrying MQTT Connection" + fontReset + Purple + "  ⤵");
 
   String str_client_id = "device_" + dId + "_" + random(1, 9999);
-  const char *username = mqtt_data_doc["username"];
-  const char *password = mqtt_data_doc["password"];
+  const char *username = mqtt_data_doc["username_app"];
+  const char *password = mqtt_data_doc["password_app"];
+
   String str_topic = mqtt_data_doc["topic"];
 
   if (mqtt_client.connect(str_client_id.c_str(), username, password))
@@ -346,7 +350,6 @@ void check_mqtt_connection()
 
   if (!mqtt_client.connected())
   {
-
     long now = millis();
 
     if (now - last_reconnect_attemp > 5000)
@@ -354,7 +357,6 @@ void check_mqtt_connection()
       last_reconnect_attemp = millis();
       reconnect();
       last_reconnect_attemp = 0;
-  
     }
   }
   else
@@ -392,6 +394,8 @@ bool get_device_config(){
  
     String mqtt_username = mqtt_data_doc["username"];
     String mqtt_password = mqtt_data_doc["password"];
+    mqtt_data_doc["username_app"] = mqtt_data_doc["username"];
+    mqtt_data_doc["password_app"] = mqtt_data_doc["password"];
     String mqtt_topic = mqtt_data_doc["topic"];
     int send_period = mqtt_data_doc["variables"][0]["variablePeriod"];
     Serial.println("\n" + mqtt_username);
@@ -402,8 +406,6 @@ bool get_device_config(){
   }
   return false;
 }
-
-
 
 long lastStats = 0;
 
